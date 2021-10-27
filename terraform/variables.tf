@@ -53,7 +53,7 @@ variable "rds_engine" {
 }
 variable "rds_engine_version" {
   description = "db engine version"
-  default     = "12.4"
+  default     = "12.7"
 }
 variable "rds_database_name" {
   description = "db worker name"
