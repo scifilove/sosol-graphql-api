@@ -1,9 +1,12 @@
 module.exports = {
   Query: {
     feed: async (parent, args, ctx) => {
+      const {offset, limit} = args;
       // 1. make sure the user is authenticated
       const userId = ctx.getUserId(ctx);
       if (!userId) throw Error("You need to be authenticated");
+      if (typeof offset !== 'number') throw Error("Offset argument for limit is missing");
+      if (typeof limit !== 'number') throw Error("Limit argument for offset is missing");
 
       // get the tweets of the user and the people whom they are following
       const following = await ctx.prisma.user
@@ -41,6 +44,8 @@ module.exports = {
           files: true,
           reactions: true,
         },
+        skip: offset,
+        take: limit,
       });
 
       return tweets;
