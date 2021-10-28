@@ -35,6 +35,8 @@
     "@graphql-tools/merge": "^8.1.2",
     "@graphql-tools/schema": "^8.2.0",
     "@prisma/client": "^3.2.1",
+    "@sentry/node": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "apollo-server": "^3.3.0",
     "aws-sdk": "^2.981.0",
     "bs58": "^4.0.1",
