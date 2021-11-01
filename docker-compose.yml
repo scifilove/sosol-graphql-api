@@ -4,7 +4,7 @@ services:
 
   sosol-api:
     restart: always
-    container_name: backend_sosol-api_1
+    container_name: sosol-graphql-api_sosol-api_1
     build: .
     environment:
       - NODE_ENV=development
