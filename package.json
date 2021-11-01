@@ -1,5 +1,5 @@
 {
-  "name": "sosol-backend",
+  "name": "sosol-graphql-api",
   "version": "1.0.0",
   "description": "SOSOL backend with Prisma + Graphql",
   "main": "src/server.js",
