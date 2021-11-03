@@ -24,8 +24,11 @@ module.exports = {
           take: limit,
         });
       }
-      // If !args.excludeFollows get all users with offset
+      // If !args.excludeFollows get all users except self with offset
       return ctx.prisma.user.findMany({
+        where: {
+          id: { notIn: userId },
+        },
         skip: offset,
         take: limit,
       });
