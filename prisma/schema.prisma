@@ -17,7 +17,7 @@ model User {
   password      String?
   consumerName  String?
   avatar        String?    @default("")
-  coverPhoto    String?    @default("https://res.cloudinary.com/tylerdurden/image/upload/v1617334073/random/Rectangle_2_mbyujf.png")
+  coverPhoto    String?    @default("https://my.sosol.app/default-cover.png")
   bio           String?    @default("")
   dob           String?    @default("")
   location      String?    @default("")
