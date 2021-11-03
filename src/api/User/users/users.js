@@ -5,15 +5,29 @@ module.exports = {
       const userId = ctx.getUserId(ctx);
       if (!userId) throw Error("You need to be authenticated");
 
-      // 2. only list users whom I am not following and limit to 4
-      const following = await ctx.prisma.user.findUnique({ where: {id: userId} }).following();
+      const offset = args.offset ? args.offset : 0;
+      const limit = args.limit ? args.limit : 15;
 
-      const userIds = following.map((user) => user.id);
+      if (args.excludeFollows) {
+        // 2. find people I am following already to exclude
+        const following = await ctx.prisma.user
+          .findUnique({ where: { id: userId } })
+          .following();
+        const userIds = following.map((user) => user.id);
+
+        // 3. find creators I am not following
+        return ctx.prisma.user.findMany({
+          where: {
+            id: { notIn: userIds },
+          },
+          skip: offset,
+          take: limit,
+        });
+      }
+      // If !args.excludeFollows get all users with offset
       return ctx.prisma.user.findMany({
-        where: {
-          id: { notIn: userIds },
-        },
-        take: 4,
+        skip: offset,
+        take: limit,
       });
     },
   },
