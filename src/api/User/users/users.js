@@ -1,9 +1,9 @@
-import {
+const {
   FOLLOWING,
   FOLLOWERS,
   EXCLUDE_FOLLOWING,
   // EXCLUDE_FOLLOWERS,
-} from '../../../constants/follow';
+} = require("../../../constants/follow");
 
 module.exports = {
   Query: {
@@ -11,11 +11,18 @@ module.exports = {
       // make sure the user is authenticated
       const userId = ctx.getUserId(ctx);
       if (!userId) throw Error("You need to be authenticated");
+      console.log(args.filter &&
+        ![FOLLOWING, FOLLOWERS, EXCLUDE_FOLLOWING].includes(args.filter));
+      if (
+        args.filter &&
+        ![FOLLOWING, FOLLOWERS, EXCLUDE_FOLLOWING].includes(args.filter)
+      )
+        throw Error(`No such filter: ${args.filter}`);
 
       const offset = args.offset ? args.offset : 0;
       const limit = args.limit ? args.limit : 15;
 
-      if (args[FOLLOWING]) {
+      if (args.filter === FOLLOWING) {
         // find creators I'm following
         const following = await ctx.prisma.user
           .findUnique({ where: { id: userId } })
@@ -30,8 +37,7 @@ module.exports = {
           skip: offset,
           take: limit,
         });
-      }
-      if (args[FOLLOWERS]) {
+      } else if (args.filter === FOLLOWERS) {
         // find creators that follow me
         const followers = await ctx.prisma.user
           .findUnique({ where: { id: userId } })
@@ -46,8 +52,7 @@ module.exports = {
           skip: offset,
           take: limit,
         });
-      }
-      if (args[EXCLUDE_FOLLOWING]) {
+      } else if (args.filter === EXCLUDE_FOLLOWING) {
         // find creators I am following already to exclude
         const following = await ctx.prisma.user
           .findUnique({ where: { id: userId } })
