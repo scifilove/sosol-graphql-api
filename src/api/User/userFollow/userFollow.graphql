@@ -1,0 +1,3 @@
+type Query {
+  userFollow(offset: Int, limit: Int): [User!]!
+}
