@@ -12,9 +12,9 @@ module.exports = {
         },
       });
 
-      if (following.length) throw Error("You are following him already.");
+      if (following.length) throw Error("You are following them already.");
 
-      // 3. otherwise, follow him and return true for success
+      // 3. otherwise, follow them and return true for success
       await ctx.prisma.user.update({
         data: {
           following: {

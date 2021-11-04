@@ -1,3 +1,3 @@
 type Query {
-  users(offset: Int, limit: Int, excludeFollows: Boolean): [User!]!
+  users(offset: Int, limit: Int, filter: String): [User!]!
 }
