@@ -11,8 +11,6 @@ module.exports = {
       // make sure the user is authenticated
       const userId = ctx.getUserId(ctx);
       if (!userId) throw Error("You need to be authenticated");
-      console.log(args.filter &&
-        ![FOLLOWING, FOLLOWERS, EXCLUDE_FOLLOWING].includes(args.filter));
       if (
         args.filter &&
         ![FOLLOWING, FOLLOWERS, EXCLUDE_FOLLOWING].includes(args.filter)
