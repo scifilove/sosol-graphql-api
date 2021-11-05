@@ -16,8 +16,8 @@ type User {
   following: [User!]!
   followers: [User!]!
   comments: [Comment!]!
-  reactions: [Reaction!]
-  files: [File!]
+  reactions: [Reaction!]!
+  files: [File!]!
   # computed fields
   isSelf: Boolean!
   isFollowing: Boolean!
@@ -35,10 +35,10 @@ type Tweet {
   user: User
   text: String!
   tags: [String!]!
-  files: [File!]
+  files: [File!]!
   mentions: [String!]
   comments: [Comment!]!
-  reactions: [Reaction!]
+  reactions: [Reaction!]!
   retweets: [Retweet!]!
   # computer fields
   commentsCount: Int!

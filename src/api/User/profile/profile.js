@@ -3,10 +3,12 @@ module.exports = {
     profile: async (parent, args, ctx) => {
       const userExists = await ctx.prisma.user.findUnique({
         where: { handle: args.handle },
-        include: { 
+        include: {
           tweets: {
             include: {
               user: true,
+              files: true,
+              reactions: true,
             },
             orderBy: {
               createdAt: "desc",
@@ -16,8 +18,6 @@ module.exports = {
           following: true,
           followers: true,
           comments: true,
-          reactions: true,
-          files: true
         }
       });
 
