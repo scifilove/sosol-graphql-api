@@ -8,8 +8,6 @@ module.exports = {
       const offset = args.offset ? args.offset : 0;
       const limit = args.limit ? args.limit : 4;
 
-      console.log(limit);
-
       // find creators I am following already to exclude
       const following = await ctx.prisma.user
         .findUnique({ where: { id: userId } })
