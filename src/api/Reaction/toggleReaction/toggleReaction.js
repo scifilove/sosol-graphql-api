@@ -2,7 +2,6 @@ module.exports = {
   Mutation: {
     toggleReaction: async (parent, args, ctx) => {
       const userId = ctx.getUserId(ctx);
-      if (!userId) throw Error("You need to be authenticated");
 
       const emoji = await ctx.prisma.reaction.findFirst({
         where: {

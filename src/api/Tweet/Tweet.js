@@ -1,11 +1,11 @@
 module.exports = {
   Tweet: {
-    commentsCount: async (parent, args, ctx) => {
+    commentsCount: async (parent, _args, ctx) => {
       return await ctx.prisma.comment.count({
         where: { tweet: { id: parent.id } },
       });
     },
-    retweetsCount: async (parent, args, ctx) => {
+    retweetsCount: async (parent, _args, ctx) => {
       return await ctx.prisma.retweet.count({
         where: {
           tweet: {
@@ -14,9 +14,9 @@ module.exports = {
         },
       });
     },
-    isTweetMine: async (parent, args, ctx) => {
-      const userId = ctx.getUserId(ctx);
-      if (!userId) throw Error("You need to be authenticated");
+    isTweetMine: async (parent, _args, ctx) => {
+      const userId = ctx.getUserId(ctx, false);
+      if (!userId) return false;
 
       const mine =  await ctx.prisma.tweet.findFirst({
         where: {
@@ -26,9 +26,9 @@ module.exports = {
 
       return mine ? true : false;
     },
-    isRetweet: async (parent, args, ctx) => {
-      const userId = ctx.getUserId(ctx);
-      if (!userId) throw Error("You need to be authenticated");
+    isRetweet: async (parent, _args, ctx) => {
+      const userId = ctx.getUserId(ctx, false);
+      if (!userId) return false;
 
       const retweet = await ctx.prisma.retweet.findFirst({
         where: {

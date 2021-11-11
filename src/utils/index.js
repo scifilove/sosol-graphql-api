@@ -1,14 +1,18 @@
 const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 
-exports.getUserId = (ctx) => {
+exports.getUserId = (ctx, throwIfUnauth = true) => {
   const token = ctx.req.headers.authorization;
   if (token) {
     const { userId } = jwt.verify(token, process.env.JWT_SECRET);
     return userId;
   }
 
-  throw Error("You need to be authenticated.");
+  if (throwIfUnauth) {
+    throw Error("You need to be authenticated.");
+  }
+
+  return false
 };
 
 exports.getSignedS3URL = async ({ file, type, expires }) => {
