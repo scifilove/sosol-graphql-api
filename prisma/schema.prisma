@@ -45,6 +45,7 @@ model Tweet {
   user      User?      @relation(name: "TweetsByUser", fields: [userId], references: [id])
   comments  Comment[]  @relation(name: "CommentsForTweets")
   files     File[]     @relation(name: "FilesForTweets")
+  gif       Gif?       @relation(name: "GifForTweets")
   reactions Reaction[] @relation(name: "ReactionsForTweets")
   mentions  Mention[]  @relation(name: "MentionsForTweets")
   retweets  Retweet[]  @relation(name: "RetweetsOfTweet")
@@ -83,6 +84,17 @@ model File {
   userId    String?
   tweet     Tweet?   @relation(name: "FilesForTweets", fields: [tweetId], references: [id])
   user      User?    @relation(name: "FilesByUser", fields: [userId], references: [id])
+}
+
+model Gif {
+  id             String   @id @default(cuid())
+  title          String
+  fixedHeightUrl String
+  originalUrl    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  tweetId        String?  @unique
+  tweet          Tweet?   @relation(name: "GifForTweets", fields: [tweetId], references: [id])
 }
 
 model Tag {

@@ -5,7 +5,7 @@ module.exports = {
       const userId = ctx.getUserId(ctx);
 
       // 2. create a new tweet
-      const { text, files, tags = [], mentions = [] } = args;
+      const { text, files, gif, tags = [], mentions = [] } = args;
 
       const tweet = await ctx.prisma.tweet.create({
         data: {
@@ -30,21 +30,32 @@ module.exports = {
         });
       }
 
+      if (gif) {
+        await ctx.prisma.gif.create({
+          data: {
+            title: gif.title,
+            fixedHeightUrl: gif.fixedHeightUrl,
+            originalUrl: gif.originalUrl,
+            tweet: { connect: { id: tweet.id } },
+          },
+        });
+      };
+
       if (tweet && mentions.length) {
         mentions.forEach(async (handle) => {
           handle = handle.substring(1);
           const user = await ctx.prisma.user.findFirst({ where: { handle } });
           if (user && user.id && userId !== user.id) {
             await ctx.prisma.mention.create({
-            data: {
-              user: {
-                connect: { id: user.id },
+              data: {
+                user: {
+                  connect: { id: user.id },
+                },
+                tweet: {
+                  connect: { id: tweet.id },
+                },
               },
-              tweet: {
-                connect: { id: tweet.id },
-              },
-            },
-          });
+            });
           }
         });
       }
