@@ -32,6 +32,9 @@ module.exports = {
           where: {
             id: { userIds },
           },
+          orderBy: {
+            updatedAt: "asc",
+          },
           skip: offset,
           take: limit,
         });
@@ -46,6 +49,9 @@ module.exports = {
         return ctx.prisma.user.findMany({
           where: {
             id: { userIds },
+          },
+          orderBy: {
+            updatedAt: "asc",
           },
           skip: offset,
           take: limit,
@@ -62,6 +68,9 @@ module.exports = {
           where: {
             id: { notIn: userIds },
           },
+          orderBy: {
+            updatedAt: "asc",
+          },
           skip: offset,
           take: limit,
         });
@@ -70,6 +79,9 @@ module.exports = {
       return ctx.prisma.user.findMany({
         where: {
           id: { notIn: userId },
+        },
+        orderBy: {
+          updatedAt: "asc",
         },
         skip: offset,
         take: limit,
