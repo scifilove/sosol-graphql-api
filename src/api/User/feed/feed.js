@@ -12,7 +12,7 @@ module.exports = {
         throw Error("Limit argument for offset is missing");
 
       let tweets = [];
-      if (userId) {
+      if (userId && !_args.global) {
         // get the tweets of the user and the people whom they are following
         const following = await ctx.prisma.user
           .findFirst({ where: { id: userId } })
