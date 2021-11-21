@@ -7,10 +7,12 @@ const { getUserId } = require("./utils");
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: 1.0,
-});
+if (process.env.NODE_ENV !== 'development') {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: 1.0,
+  });
+}
 
 const prisma = new PrismaClient();
 
