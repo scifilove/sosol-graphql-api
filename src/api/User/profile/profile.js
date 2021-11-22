@@ -9,6 +9,7 @@ module.exports = {
               user: true,
               files: true,
               reactions: true,
+              gif: true,
             },
             orderBy: {
               createdAt: "desc",

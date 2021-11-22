@@ -6,6 +6,7 @@ module.exports = {
         include: {
           user: true,
           files: true,
+          gif: true,
           comments: {
             include: { user: true },
           },

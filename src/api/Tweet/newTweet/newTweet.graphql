@@ -4,5 +4,6 @@ type Mutation {
     files: [String!]
     tags: [String!]
     mentions: [String!]
+    gif: GifInput
   ): Tweet!
 }

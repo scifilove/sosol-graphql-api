@@ -35,6 +35,7 @@ type Tweet {
   user: User
   text: String!
   tags: [String!]!
+  gif: Gif
   files: [File!]!
   mentions: [String!]
   comments: [Comment!]!
@@ -77,6 +78,20 @@ type File {
   url: String!
   tweet: Tweet
   user: User
+}
+
+type Gif {
+  id: ID!
+  title: String!
+  fixedHeightUrl: String!
+  originalUrl: String!
+  tweet: Tweet
+}
+
+input GifInput {
+  title: String!
+  fixedHeightUrl: String!
+  originalUrl: String!
 }
 
 type Retweet {
