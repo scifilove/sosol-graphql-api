@@ -46,6 +46,7 @@ model Tweet {
   comments  Comment[]  @relation(name: "CommentsForTweets")
   files     File[]     @relation(name: "FilesForTweets")
   gif       Gif?       @relation(name: "GifForTweets")
+  nft       NFT?       @relation(name: "NFTForTweets")
   reactions Reaction[] @relation(name: "ReactionsForTweets")
   mentions  Mention[]  @relation(name: "MentionsForTweets")
   retweets  Retweet[]  @relation(name: "RetweetsOfTweet")
@@ -114,6 +115,23 @@ model Mention {
   userId    String?
   tweet     Tweet?   @relation(name: "MentionsForTweets", fields: [tweetId], references: [id])
   user      User?    @relation(name: "MentionsForUser", fields: [userId], references: [id])
+}
+
+model NFT {
+  id                   String   @id @default(cuid())
+  publicKey            String   @unique
+  name                 String?
+  symbol               String?
+  description          String?
+  sellerFeeBasisPoints Int?
+  image                String
+  attributes           Json?
+  collection           Json?
+  properties           Json?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  tweetId              String?  @unique
+  tweet                Tweet?   @relation(name: "NFTForTweets", fields: [tweetId], references: [id])
 }
 
 model Retweet {

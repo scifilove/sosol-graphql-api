@@ -102,6 +102,44 @@ type Retweet {
   updatedAt: String!
 }
 
+type NFT {
+  publicKey: String!
+  name: String
+  symbol: String
+  description: String
+  sellerFeeBasisPoints: Int
+  image: String!
+  attributes: [AttributesEntity]
+  collection: Collection
+  properties: Properties
+}
+
+type AttributesEntity {
+  traitType: String
+  value: String
+}
+
+type Collection {
+  name: String
+  family: String
+}
+
+type Properties {
+  files: [FilesEntity]
+  category: String
+  creators: [CreatorsEntity]
+}
+
+type FilesEntity {
+  uri: String
+  type: String
+}
+
+type CreatorsEntity {
+  address: String
+  share: Int
+}
+
 type Nonce {
   hasPublicAddress: Boolean!
   user: User
