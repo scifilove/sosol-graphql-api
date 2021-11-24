@@ -119,7 +119,7 @@ model Mention {
 
 model NFT {
   id                   String   @id @default(cuid())
-  publicKey            String   @unique
+  publicKey            String
   name                 String?
   externalUrl          String?
   symbol               String?
