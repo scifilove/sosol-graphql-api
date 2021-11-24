@@ -10,6 +10,7 @@ module.exports = {
               files: true,
               reactions: true,
               gif: true,
+              nft: true,
             },
             orderBy: {
               createdAt: "desc",
