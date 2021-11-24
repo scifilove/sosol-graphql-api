@@ -5,7 +5,7 @@ module.exports = {
       const userId = ctx.getUserId(ctx);
 
       // 2. create a new tweet
-      const { text, files, gif, tags = [], mentions = [] } = args;
+      const { text, files, gif, nft, tags = [], mentions = [] } = args;
 
       const tweet = await ctx.prisma.tweet.create({
         data: {
@@ -36,6 +36,23 @@ module.exports = {
             title: gif.title,
             fixedHeightUrl: gif.fixedHeightUrl,
             originalUrl: gif.originalUrl,
+            tweet: { connect: { id: tweet.id } },
+          },
+        });
+      };
+
+      if (nft) {
+        await ctx.prisma.nFT.create({
+          data: {
+            publicKey: nft.publicKey,
+            name: nft.name,
+            symbol: nft.symbol,
+            description: nft.description,
+            sellerFeeBasisPoints: nft.sellerFeeBasisPoints,
+            image: nft.image,
+            attributes: nft.attributes,
+            collection: nft.collection,
+            properties: nft.properties,
             tweet: { connect: { id: tweet.id } },
           },
         });

@@ -103,6 +103,7 @@ type Retweet {
 }
 
 type NFT {
+  id: ID!
   publicKey: String!
   name: String
   symbol: String
@@ -136,6 +137,44 @@ type FilesEntity {
 }
 
 type CreatorsEntity {
+  address: String
+  share: Int
+}
+
+input NFTInput {
+  publicKey: String!
+  name: String
+  symbol: String
+  description: String
+  sellerFeeBasisPoints: Int
+  image: String!
+  attributes: [AttributesEntityInput]
+  collection: CollectionInput
+  properties: PropertiesInput
+}
+
+input AttributesEntityInput {
+  traitType: String
+  value: String
+}
+
+input CollectionInput {
+  name: String
+  family: String
+}
+
+input PropertiesInput {
+  files: [FilesEntityInput]
+  category: String
+  creators: [CreatorsEntityInput]
+}
+
+input FilesEntityInput {
+  uri: String
+  type: String
+}
+
+input CreatorsEntityInput {
   address: String
   share: Int
 }
