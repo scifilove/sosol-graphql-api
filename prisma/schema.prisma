@@ -121,6 +121,7 @@ model NFT {
   id                   String   @id @default(cuid())
   publicKey            String   @unique
   name                 String?
+  externalUrl          String?
   symbol               String?
   description          String?
   sellerFeeBasisPoints Int?

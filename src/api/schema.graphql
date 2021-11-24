@@ -109,6 +109,7 @@ type NFT {
   name: String
   symbol: String
   description: String
+  externalUrl: String
   sellerFeeBasisPoints: Int
   image: String!
   attributes: [AttributesEntity]
@@ -147,6 +148,7 @@ input NFTInput {
   name: String
   symbol: String
   description: String
+  externalUrl: String
   sellerFeeBasisPoints: Int
   image: String!
   attributes: [AttributesEntityInput]

@@ -52,6 +52,7 @@ module.exports = {
             image: nft.image,
             attributes: nft.attributes,
             collection: nft.collection,
+            externalUrl: nft.externalUrl,
             properties: nft.properties,
             tweet: { connect: { id: tweet.id } },
           },
