@@ -7,6 +7,7 @@ module.exports = {
           user: true,
           files: true,
           gif: true,
+          nft: true,
           comments: {
             include: { user: true },
           },
