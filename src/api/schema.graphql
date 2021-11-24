@@ -36,6 +36,7 @@ type Tweet {
   text: String!
   tags: [String!]!
   gif: Gif
+  nft: NFT
   files: [File!]!
   mentions: [String!]
   comments: [Comment!]!
