@@ -1,3 +1,3 @@
 type Query {
-  profile(handle: String!): User!
+  profile(id: String!): User!
 }

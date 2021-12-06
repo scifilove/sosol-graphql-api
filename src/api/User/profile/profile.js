@@ -2,7 +2,7 @@ module.exports = {
   Query: {
     profile: async (parent, args, ctx) => {
       const userExists = await ctx.prisma.user.findUnique({
-        where: { handle: args.handle },
+        where: { id: args.id },
         include: {
           tweets: {
             include: {
@@ -23,7 +23,7 @@ module.exports = {
         }
       });
 
-      if (!userExists) throw Error(`No user found for handle - ${args.handle}`);
+      if (!userExists) throw Error(`No user found for id - ${args.id}`);
       return userExists;
     },
   },
